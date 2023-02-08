@@ -133,7 +133,8 @@ MEMORY
   config_BFC55F9C             : ORIGIN = 0xBFC55F9C, LENGTH = 0x4
   config_BFC55FBC             : ORIGIN = 0xBFC55FBC, LENGTH = 0x4
   config_BFC55FDC             : ORIGIN = 0xBFC55FDC, LENGTH = 0x4
-  kseg0_data_mem       (w!x)  : ORIGIN = 0x80000000, LENGTH = 0x40000
+  kseg0_data_mem       (w!x)  : ORIGIN = 0x80000300, LENGTH = 0x3FD00
+  kseg0_debug_mem      (w!x)  : ORIGIN = 0x80000000, LENGTH = 0x300
   sfrs                        : ORIGIN = 0xBF800000, LENGTH = 0x100000
   configsfrs_BFC55E88         : ORIGIN = 0xBFC55E88, LENGTH = 0x18
   configsfrs_BFC55EBC         : ORIGIN = 0xBFC55EBC, LENGTH = 0x4
@@ -1146,7 +1147,7 @@ SECTIONS
     . += (DEFINED (_DEBUGGER) ? 0x200 : 0x0);
     /* Additional data memory required for DSPr2 registers */
     . += (DEFINED (_DEBUGGER) ? 0x80 : 0x0);
-  } >kseg0_data_mem
+  } >kseg0_debug_mem
   .jcr   :
   {
     KEEP (*(.jcr))
